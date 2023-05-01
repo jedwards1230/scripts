@@ -20,7 +20,8 @@ def build_messages():
     resume = read_description("resume.txt")
     input = """
         Create a cover letter for a software engineer position. 
-        Emphasize my role as a full stack developer. 
+        Emphasize my role as a full stack developer.
+        Only use the information provided in the following resume:
         Resume: {0} 
         Job Description: {1}
     """
@@ -36,7 +37,6 @@ def play_sound():
 
 
 def get_letter() -> None:
-    messages = build_messages()
     messages = {"role": "system", "content": build_messages()}
     model_id = "gpt-4"
 
