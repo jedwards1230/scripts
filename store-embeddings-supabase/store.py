@@ -48,9 +48,10 @@ async def store_doc(doc: Document) -> None:
         "embedding"
     ]
 
-    # Insert the embedding into the embeddings table
-    supabase.table(TABLE_EMBEDDINGS).insert(
-        {"embedding": embedding, "document_id": id}
+    # Upsert (update or insert) the embedding into the embeddings table
+    supabase.table(TABLE_EMBEDDINGS).upsert(
+        {"embedding": embedding, "document_id": id},
+        on_conflict="document_id",
     ).execute()
 
     print(f"Stored document {title}")
